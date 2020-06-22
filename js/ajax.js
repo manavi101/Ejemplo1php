@@ -49,10 +49,7 @@ function delprod(idprod){
         type: "POST",
         data: {[csrfName]: csrfHash,idprod:idprod},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/delProducto",
-        dataType: "json",
-        success: function(data){
-        csrfName = data.csrfName;
-        csrfHash = data.csrfHash;
+        success: function(){
           alert("El  producto "+idprod+" se elimino correctamente");
           getproductos();
         },
@@ -66,13 +63,10 @@ function postproducto(nombreprod,preciopesos,idprod){
         type: "POST",
         data: {[csrfName]: csrfHash,nombreprod:nombreprod,preciopesos:preciopesos,idprod:idprod},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/postProducto",
-        dataType: "json",
-        success: function(data){
-          csrfName = data.csrfName;
-          csrfHash = data.csrfHash;
+        success: function(){
           getproductos();
           $('#EditprodModal').modal('hide'); 
-          $('#putProducto').removeAttr("disabled","disabled");
+          $('#postProducto').removeAttr("disabled","disabled");
         },
         error : function(data) {
           $('#postProducto').removeAttr("disabled","disabled");
@@ -92,10 +86,7 @@ function putproducto(nombreprod,preciopesos){
         type: "POST",
         data: {[csrfName]: csrfHash,nombreprod:nombreprod,preciopesos:preciopesos},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/putProducto",
-        dataType: "json",
-        success: function(data){
-          csrfName = data.csrfName;
-          csrfHash = data.csrfHash;
+        success: function(){
           getproductos();
           $('#AddprodModal').modal('hide'); 
           $('#putProducto').removeAttr("disabled","disabled");
@@ -118,13 +109,7 @@ function putdolar(dolar){
         type: "POST",
         data: {[csrfName]: csrfHash,dolar:dolar},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Dolares/putDolar",
-        dataType: "json",
-        success: function(data){
-          csrfName = data.csrfName;
-          csrfHash = data.csrfHash;
-          console.log(1);
-          console.log(csrfHash);
-          console.log(data.csrfHash);
+        success: function(){
           $('#dolar').removeClass("is-invalid");
           $('#dolar').addClass("is-valid");
           $("#valid-dolar").remove();

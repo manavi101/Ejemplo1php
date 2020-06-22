@@ -26,8 +26,6 @@ class Dolares extends CI_Controller {
 			http_response_code(400);
 			die;
 		}
-		$data =  array("csrfName" => $this->security->get_csrf_token_name(),"csrfHash" =>$this->security->get_csrf_hash());
-		echo json_encode($data);
 	}
 	public function getDolar()
 	{
