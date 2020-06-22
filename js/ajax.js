@@ -3,7 +3,7 @@ var URLprotocol = window.location.protocol;
 function getproductos(){
     $.ajax({
       type: "GET",
-      url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/getProductos",
+      url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/getProductos",
       dataType: "json",
       success: function(data){
         $('#productos > tr').remove();
@@ -26,7 +26,7 @@ function getproductos(){
 function getdolar(){
     $.ajax({
     type: "GET",
-    url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Dolares/getDolar",
+    url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Dolares/getDolar",
     dataType: "json",
     success: function(data){
         $('#dolar').val(data);
@@ -48,7 +48,7 @@ function delprod(idprod){
     $.ajax({
         type: "POST",
         data: {[csrfName]: csrfHash,idprod:idprod},
-        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/delProducto",
+        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/delProducto",
         dataType: "json",
         success: function(data){
         csrfName = data.csrfName;
@@ -65,13 +65,14 @@ function postproducto(nombreprod,preciopesos,idprod){
     $.ajax({
         type: "POST",
         data: {[csrfName]: csrfHash,nombreprod:nombreprod,preciopesos:preciopesos,idprod:idprod},
-        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/postProducto",
+        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/postProducto",
         dataType: "json",
         success: function(data){
           csrfName = data.csrfName;
           csrfHash = data.csrfHash;
           getproductos();
           $('#EditprodModal').modal('hide'); 
+          $('#putProducto').removeAttr("disabled","disabled");
         },
         error : function(data) {
           $('#postProducto').removeAttr("disabled","disabled");
@@ -90,13 +91,14 @@ function putproducto(nombreprod,preciopesos){
     $.ajax({
         type: "POST",
         data: {[csrfName]: csrfHash,nombreprod:nombreprod,preciopesos:preciopesos},
-        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/putProducto",
+        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Productos/putProducto",
         dataType: "json",
         success: function(data){
-          var csrfName = data.csrfName;
-          var csrfHash = data.csrfHash;
+          csrfName = data.csrfName;
+          csrfHash = data.csrfHash;
           getproductos();
           $('#AddprodModal').modal('hide'); 
+          $('#putProducto').removeAttr("disabled","disabled");
         },
         error : function(data) {
           $('#putProducto').removeAttr("disabled","disabled");
@@ -115,7 +117,7 @@ function putdolar(dolar){
     $.ajax({
         type: "POST",
         data: {[csrfName]: csrfHash,dolar:dolar},
-        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Dolares/putDolar",
+        url: URLprotocol+"//"+URLdomain+"/ejerciciocac/Dolares/putDolar",
         dataType: "json",
         success: function(data){
           csrfName = data.csrfName;
