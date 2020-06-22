@@ -47,9 +47,12 @@ function getdolar(){
 function delprod(idprod){
     $.ajax({
         type: "POST",
-        data: {idprod:idprod},
+        data: {[csrfName]: csrfHash,idprod:idprod},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/delProducto",
-        success: function(){
+        dataType: "json",
+        success: function(data){
+        csrfName = data.csrfName;
+        csrfHash = data.csrfHash;
           alert("El  producto "+idprod+" se elimino correctamente");
           getproductos();
         },
@@ -61,9 +64,12 @@ function delprod(idprod){
 function postproducto(nombreprod,preciopesos,idprod){
     $.ajax({
         type: "POST",
-        data: {nombreprod:nombreprod,preciopesos:preciopesos,idprod:idprod},
+        data: {[csrfName]: csrfHash,nombreprod:nombreprod,preciopesos:preciopesos,idprod:idprod},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/postProducto",
-        success: function(){
+        dataType: "json",
+        success: function(data){
+          csrfName = data.csrfName;
+          csrfHash = data.csrfHash;
           getproductos();
           $('#EditprodModal').modal('hide'); 
         },
@@ -83,9 +89,12 @@ function postproducto(nombreprod,preciopesos,idprod){
 function putproducto(nombreprod,preciopesos){
     $.ajax({
         type: "POST",
-        data: {nombreprod:nombreprod,preciopesos:preciopesos},
+        data: {[csrfName]: csrfHash,nombreprod:nombreprod,preciopesos:preciopesos},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Productos/putProducto",
-        success: function(){
+        dataType: "json",
+        success: function(data){
+          var csrfName = data.csrfName;
+          var csrfHash = data.csrfHash;
           getproductos();
           $('#AddprodModal').modal('hide'); 
         },
@@ -105,9 +114,15 @@ function putproducto(nombreprod,preciopesos){
 function putdolar(dolar){
     $.ajax({
         type: "POST",
-        data: {dolar:dolar},
+        data: {[csrfName]: csrfHash,dolar:dolar},
         url: URLprotocol+"//"+URLdomain+"/ejerciciocac/back/Dolares/putDolar",
-        success: function(){
+        dataType: "json",
+        success: function(data){
+          csrfName = data.csrfName;
+          csrfHash = data.csrfHash;
+          console.log(1);
+          console.log(csrfHash);
+          console.log(data.csrfHash);
           $('#dolar').removeClass("is-invalid");
           $('#dolar').addClass("is-valid");
           $("#valid-dolar").remove();
